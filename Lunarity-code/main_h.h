@@ -6,6 +6,8 @@
 #include <lauxlib.h>
 #include <lualib.h>
 
+//global lua state
+extern lua_State* L;
 //script struct
 typedef struct lua_script lua_script;
 struct lua_script {

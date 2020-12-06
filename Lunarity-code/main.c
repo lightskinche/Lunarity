@@ -1,4 +1,4 @@
-#include "mainh.h"
+#include "main_h.h"
 #include "linkedlist_h.h"
 
 linkedList transforms; //for all of the gametransforms in the scene
