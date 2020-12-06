@@ -1,6 +1,7 @@
 #include "main_h.h"
 #include "linkedlist_h.h"
 
+linkedList start_transforms; //this is what gets shown in the editor and saved, when the scene is played it copies itself to the "transforms" list and plays accordingly
 linkedList transforms; //for all of the gametransforms in the scene
 lua_State* L; //global lua state
 //prototypes
@@ -15,9 +16,12 @@ int main(void) {
 	lua_script test = lua_loadscriptdata("scripts/engine_test.lua");
 	renderable_square test_renderable = { 100,500 };
 	transform test_obj = { 10,10,&test,&test_renderable, RENDERABLE_SQUARE };
-	LIST_AddElement(&transforms, &test_obj);
+	SERALIZE_WriteTransform("test.txt", &test_obj);
+	transform* test_readback = SERALIZE_ReadTransforms("test.txt", 0);
+	renderable_square* tmp_renderablesq = test_readback->renderable_shape;
+	//printf("returned from seralization:\nx: %d, y: %d, script size: %d, script data:\n%s\nw: %d, h: %d", test_readback->x, test_readback->y, test_readback->attached_script->size, test_readback->attached_script->lua_data, tmp_renderablesq->w, tmp_renderablesq->h);
+	LIST_AddElement(&transforms, test_readback);
 	objects_update();
-
 	lua_close(L);
 	return 0;
 }
@@ -34,8 +38,8 @@ lua_script lua_loadscriptdata(char* fname) {
 		fread(script_data, 1, size, fp);
 		fclose(fp);
 	    for (int i = 0; i < size; ++i) {
-		     if (script_data[i] == '\0')
-				script_data[i] = ' ';
+			if (script_data[i] == '\0')
+				script_data[i] = ' ', size = i;
 		}
 		tmp_script.lua_fname = fname, tmp_script.lua_data = script_data, tmp_script.size = size;
 		//printf("%s,%d\n", script_data,size);

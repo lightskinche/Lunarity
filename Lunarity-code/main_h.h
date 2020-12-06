@@ -18,15 +18,19 @@ struct lua_script {
 //renderable objects
 typedef struct renderable_square renderable_square;
 struct renderable_square {
-	float w, h;
+	int w, h;
 };
 #define RENDERABLE_SQUARE 1
 
 //generic object class that populates the objects list
 typedef struct transform transform;
 struct transform {
-	float x, y;
+	int x, y;
 	lua_script* attached_script;
 	void* renderable_shape;
 	unsigned int flags;
 };
+
+//function prototypes start here, first is seralization functins
+extern void SERALIZE_WriteTransform(const char* fname, transform* input);
+extern transform* SERALIZE_ReadTransforms(const char* fname, unsigned int amount);

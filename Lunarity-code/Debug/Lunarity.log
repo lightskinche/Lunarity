@@ -1,11 +1,7 @@
 ﻿  main.c
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(36,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(90,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(90,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(106,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(106,72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(82,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(83,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(98,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(99,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(40,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(86,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(87,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(102,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(103,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
   Lunarity.vcxproj -> C:\Users\Light\source\repos\Lunarity\Lunarity-code\Debug\Lunarity.exe
