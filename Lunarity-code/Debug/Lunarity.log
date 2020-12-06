@@ -1,0 +1,11 @@
+﻿  main.c
+C:\Users\Light\source\repos\Lunarity\main.c(34,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Light\source\repos\Lunarity\main.c(88,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(88,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(104,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(104,72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(80,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(81,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(96,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+C:\Users\Light\source\repos\Lunarity\main.c(97,1): warning C4244: 'initializing': conversion from 'lua_Number' to 'int', possible loss of data
+  Lunarity.vcxproj -> C:\Users\Light\source\repos\Lunarity\Debug\Lunarity.exe

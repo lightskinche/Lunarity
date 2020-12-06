@@ -1,0 +1,2 @@
+C:\Users\Light\source\repos\Lunarity\Debug\Lunarity.exe
+C:\Users\Light\source\repos\Lunarity\Debug\Lunarity.pdb
