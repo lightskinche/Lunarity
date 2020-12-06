@@ -9,6 +9,8 @@ lua_script lua_loadscriptdata(char* fname);
 void objects_update(void);
 
 int main(void) {
+	//TODO add in SDL, SDL_Mixer, SDL_Image, SDL_TTF, OpenGL, Chickmunk physics, and cglm; also, add a UI for the engine
+	//Definitly a lot on the TODO list, litterally
 	L = lua_open(); 
 	lua_script test = lua_loadscriptdata("scripts/engine_test.lua");
 	renderable_square test_renderable = { 100,500 };
