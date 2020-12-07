@@ -17,48 +17,8 @@ C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(130,27): 
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(144,27): warning C4142: 'glm_max': benign redefinition of type
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(159,50): warning C4142: 'glm_clamp': benign redefinition of type
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(170,25): warning C4142: 'glm_clamp_zo': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(20,16): warning C4026: function declared with formal parameter list
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(61,25): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(59,1): warning C4090: 'initializing': different 'const' qualifiers
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(112,24): warning C4018: '<': signed/unsigned mismatch
-  serialize.c
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(386,21): warning C4013: 'glm_max' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(402,21): warning C4013: 'glm_min' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(507,18): warning C4013: 'glm_pow2' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(507,55): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(533,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(534,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(547,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(548,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(561,19): warning C4013: 'glm_clamp' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(561,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(562,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(581,16): warning C4013: 'glm_vec2_fill' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\vec2.h(581,32): warning C4013: 'glm_clamp_zo' undefined; assuming extern returning int
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(118,19): warning C4142: 'glm_pow2': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(130,27): warning C4142: 'glm_min': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(144,27): warning C4142: 'glm_max': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(159,50): warning C4142: 'glm_clamp': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\include\cglm\util.h(170,25): warning C4142: 'glm_clamp_zo': benign redefinition of type
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(8,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(11,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(25,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(30,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(35,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(57,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(58,14): warning C4477: 'fscanf' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'char *'
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(58,14): message : consider using '%hhx' in the format string
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(61,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(62,15): warning C4477: 'fscanf' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'char *'
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(62,15): message : consider using '%hhx' in the format string
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(79,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(87,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(88,16): warning C4477: 'fscanf' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'char *'
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(88,16): message : consider using '%hhx' in the format string
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(93,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(94,17): warning C4477: 'fscanf' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'Uint8 *'
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(94,17): message : consider using '%hhx' in the format string
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(99,15): warning C4477: 'fscanf' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'Uint8 *'
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\serialize.c(99,15): message : consider using '%hhx' in the format string
-  Generating Code...
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(22,16): warning C4026: function declared with formal parameter list
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(96,25): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(77,1): warning C4090: 'initializing': different 'const' qualifiers
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(132,21): warning C4018: '<': signed/unsigned mismatch
   Lunarity.vcxproj -> C:\Users\Light\source\repos\Lunarity\Lunarity-code\Debug\Lunarity.exe

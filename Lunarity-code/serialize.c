@@ -1,15 +1,11 @@
 #include "main_h.h"
-
+void* LIST_At(const linkedList* const list, int location);
+//TODO SERALIZE AUDIO COMPONENT LIKE YOU SERIALIZED THE SCRIPT, MAKE IT USE THE RESOURCE LINKED LIST FOR AUDIO
 void SERALIZE_WriteTransform(const char* fname, transform* input) {
 	FILE* fp = fopen(fname, "w");
 	fprintf(fp, "%x\n%x\n", input->x, input->y);
 	if (input->attached_script) {
-		fprintf(fp, "%x\n%x\n",1,input->attached_script->size);
-		for(int i = 0; i < input->attached_script->size; ++i)
-		  fprintf(fp, "%x\n", input->attached_script->lua_data[i]);
-		fprintf(fp, "%x\n", input->attached_script->name_size);
-		for(int i = 0; i < input->attached_script->name_size; ++i)
-			fprintf(fp, "%x\n", input->attached_script->lua_fname[i]);
+		fprintf(fp, "%x\n%x\n", 1, input->attached_script->resource_id);
 	} 
 	//print out the flags before we get into the components
 	fprintf(fp, "%x\n", input->flags);
@@ -47,21 +43,11 @@ void SERALIZE_WriteTransform(const char* fname, transform* input) {
 }
 transform* SERALIZE_ReadTransforms(const char* fname, unsigned int amount) {
 	transform* tmp_transform = calloc(1, sizeof(transform));
-	unsigned int script_attached = 0, script_attached_size = 0, script_name_size = 0, flags = 0;
+	unsigned int script_attached = 0, script_resource_id = 0, script_name_size = 0, flags = 0;
 	FILE* fp = fopen(fname, "r");
-	fscanf(fp, "%x\n%x\n%x\n%x\n", &tmp_transform->x, &tmp_transform->y,&script_attached,&script_attached_size);
+	fscanf(fp, "%x\n%x\n%x\n%x\n", &tmp_transform->x, &tmp_transform->y,&script_attached,&script_resource_id);
 	if (script_attached) {
-		char* tmp_lua_script_data_buffer = calloc(1, script_attached_size);
-		lua_script* tmp_script_buffer = calloc(1, sizeof(lua_script));
-		tmp_script_buffer->lua_data = tmp_lua_script_data_buffer, tmp_script_buffer->size = script_attached_size;
-		for (int i = 0; i < script_attached_size; ++i)
-			fscanf(fp,"%x\n", &tmp_lua_script_data_buffer[i]);
-		fscanf(fp, "%x\n", &script_name_size);
-		char* tmp_script_fname = calloc(1, script_name_size);
-		for (int i = 0; i < script_name_size; ++i)
-			fscanf(fp, "%x\n", &tmp_script_fname[i]);
-		tmp_script_buffer->lua_fname = tmp_script_fname;
-		tmp_transform->attached_script = tmp_script_buffer;
+		tmp_transform->attached_script = LIST_At(&scripts, script_resource_id);
 	}
 	fscanf(fp, "%x\n", &flags);
 	tmp_transform->flags = flags;

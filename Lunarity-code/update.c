@@ -9,6 +9,9 @@ void objects_update(void) {
 			lua_setglobal(L, "transform_x");
 			lua_pushnumber(L, tmp->y);
 			lua_setglobal(L, "transform_y");
+			//next we should give the script acess to its flags
+			lua_pushnumber(L, tmp->flags);
+			lua_setglobal(L, "flags");
 			//check if there is a renderable component attached to this transform
 			if (tmp->renderable_shape) {
 				if (tmp->flags & RENDERABLE_SQUARE) {
@@ -28,7 +31,7 @@ void objects_update(void) {
 					strcat(tmp_name_buffer, "_playing");
 					lua_pushboolean(L, tmp_audio->playing);
 					lua_setglobal(L, tmp_name_buffer);
-					printf("%s\n", tmp_name_buffer);
+					//printf("%s\n", tmp_name_buffer);
 					free(tmp_name_buffer);
 				}
 			}
@@ -74,13 +77,14 @@ void objects_update(void) {
 					lua_pcall(L, 0, 1, 0);
 					Uint8 audio_play = lua_tonumber(L, -1);
 					tmp_audio->playing = audio_play;
-					if(audio_play)
-						printf("playing %s\n", tmp_audio->name); //obviously a debug function since I don't feel like setting up audio right now
+					/*if(audio_play)
+						printf("\033[97;0mplaying %s\n%s", tmp_audio->name,lua_output_color); //obviously a debug function since I don't feel like setting up audio right now*/
 				}
 			}
-			
+			lua_getglobal(L, "flags");
+			tmp->flags = lua_tonumber(L, -1); //retreive and save the state of flags
 			printf("\033[97;0m"); //set everything back to normal
-			lua_settop(L, 0);
+			lua_settop(L, 0); //make sure we don't waste the stack
 		}
 	}
 

@@ -44,7 +44,7 @@ extern SDL_GLContext* ui_window_glcontext;
 typedef struct lua_script lua_script;
 struct lua_script {
 	char* lua_fname, *lua_data;
-	unsigned int size, name_size;
+	unsigned int size, name_size, resource_id;
 };
 //renderable objects
 typedef struct renderable_square renderable_square;
@@ -101,7 +101,8 @@ struct linkedList {
 //engine lists
 extern linkedList start_transforms; //this is what gets shown in the editor and saved, when the scene is played it copies itself to the "transforms" list and plays accordingly
 extern linkedList transforms; //for all of the gametransforms in the scene
-extern linkedList music;
+//this is the start of "resource" lists, the idea is that instead of having each object have a copy of a 1kb lua script, we can keep it in this list and point to, make sure this gets proprely serailized
+extern linkedList music, audio, scripts, shaders;
 
 //function prototypes start here, first is seralization functins
 extern void SERALIZE_WriteTransform(const char* fname, transform* input);
@@ -112,3 +113,5 @@ extern void CONSOLE_ThrowWarning(unsigned int flags, const char* message, const 
 extern audio_component* COMPONENT_CreateAudioComponent(const char* name, Mix_Chunk* data);
 extern void TRANSFORM_AddComponent(int index, void* component, Uint8 type, transform* transform_to_attach);
 extern void TRANSFORM_SetSize(transform* transform_to_modify, int size);
+extern void LUA_SetKeyboardInput(Uint8* key_input);
+extern void LUA_SetFunctions(void);

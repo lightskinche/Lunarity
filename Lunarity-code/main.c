@@ -2,6 +2,8 @@
 #include "linkedlist_h.h"
 linkedList start_transforms; //this is what gets shown in the editor and saved, when the scene is played it copies itself to the "transforms" list and plays accordingly
 linkedList transforms; //for all of the gametransforms in the scene
+linkedList music, audio, scripts, shaders; //resource lists, described in the header file next to the declearation
+//TODO SERIALIZE THE LINKED LISTS ABOVE WITH THEIR RESPECTIVE STRUCTURES, CAPATIALIZED TO CATCH YOUR ATTENTION
 lua_State* L; //global lua state
 SDL_Window* ui_window; //engine's ui window
 SDL_GLContext* ui_window_glcontext;
@@ -14,11 +16,11 @@ float start_engine;
 char* lua_output_color = "\033[35;1m";
 //prototypes
 void lua_update(lua_script* script_to_update);
-lua_script lua_loadscriptdata(char* fname);
+lua_script* lua_loadscriptdata(char* fname);
 void objects_update(void);
 
 int main(void) {
-	//TODO add a UI for the engine, add support for all of the libs and stuff that you just included
+	//TODO add a UI for the engine, add support for all of the libs and stuff that you just included, also make the ui window SDL_Renderer and make the game window opengl
 	//Still quite a lot on the todo list, but i'll manage
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); //setting up GL
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -55,9 +57,42 @@ int main(void) {
 		if (tmp_error = glGetError())
 			printf("Failed to initilize openGL, %x\n", tmp_error);
 	}
+	//setting up lua
+	L = lua_open(); 
+	luaL_openlibs(L);
+	lua_script* test = lua_loadscriptdata("scripts/engine_test.lua");
+	renderable_square test_renderable = { 100,500 };
+	audio_component* test_audio = COMPONENT_CreateAudioComponent("walking_component", NULL);
+	audio_component* test_audio2 = COMPONENT_CreateAudioComponent("running_component", NULL); //ALL COMPONENTS HAVE TO END WITH "_component" must not contain any underscores besides the one before "component"
+	transform test_obj = { 10,10,test,&test_renderable, RENDERABLE_SQUARE };
+	TRANSFORM_SetSize(&test_obj, 2);
+	TRANSFORM_AddComponent(0, test_audio, COMPONENT_AUDIO_PLAYER, &test_obj);
+	TRANSFORM_AddComponent(1, test_audio2, COMPONENT_AUDIO_PLAYER, &test_obj);
+	SERALIZE_WriteTransform("engine_state.dat", &test_obj);
+	transform* test_readback = SERALIZE_ReadTransforms("engine_state.dat", 0);
+	LIST_AddElement(&transforms, test_readback);
+
 	//handle events and main engine loop
-	Uint8* key_input = SDL_GetKeyboardState(NULL);
 	SDL_Event event_handle;
+	Uint8* key_input = SDL_GetKeyboardState(NULL);
+	//set up input table in lua
+	lua_newtable(L);
+	lua_setglobal(L, "keyboard");
+	LUA_SetFunctions();
+	//run the setup function in lua
+	for (int i = 0; i < transforms.count; ++i) {
+		transform* tmp = LIST_At(&transforms, i);
+		if (tmp->attached_script) {			
+			//give it the ability to edit flags if the script wants to
+			lua_pushnumber(L, tmp->flags);
+			lua_setglobal(L, "flags");
+			lua_update(tmp->attached_script);
+			lua_getglobal(L, "setup"); //this function updates the x and y
+			lua_pcall(L, 0, 0, 0); //call the setup function
+			lua_settop(L, 0);
+		}
+	}
+	while (1) {
 		start_engine = clock();
 		if (SDL_PollEvent(&event_handle)) {
 			if (event_handle.type == SDL_WINDOWEVENT) {
@@ -67,38 +102,23 @@ int main(void) {
 
 			}
 		}
+		//update keyboard_input
+		LUA_SetKeyboardInput(key_input);
 		//render loop here
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		objects_update();
 		SDL_GL_SwapWindow(ui_window);
 		delta_time_engine = clock() - start_engine;
 		delta_time_engine /= CLOCKS_PER_SEC;
-	
-
-	L = lua_open(); 
-	lua_script test = lua_loadscriptdata("scripts/engine_test.lua");
-	renderable_square test_renderable = { 100,500 };
-	audio_component* test_audio = COMPONENT_CreateAudioComponent("walking_component", NULL);
-	audio_component* test_audio2 = COMPONENT_CreateAudioComponent("running_component", NULL); //ALL COMPONENTS HAVE TO END WITH "_component"
-	transform test_obj = { 10,10,&test,&test_renderable, RENDERABLE_SQUARE };
-	TRANSFORM_SetSize(&test_obj, 2);
-	TRANSFORM_AddComponent(0, test_audio, COMPONENT_AUDIO_PLAYER, &test_obj);
-	TRANSFORM_AddComponent(1, test_audio2, COMPONENT_AUDIO_PLAYER, &test_obj);
-	SERALIZE_WriteTransform("engine_state.dat", &test_obj);
-	transform* test_readback = SERALIZE_ReadTransforms("engine_state.dat", 0);
-	//renderable_square* tmp_renderablesq = test_readback->renderable_shape;
-	//printf("returned from seralization:\nx: %d, y: %d, script size: %d, script data:\n%s\nw: %d, h: %d", test_readback->x, test_readback->y, test_readback->attached_script->size, test_readback->attached_script->lua_data, tmp_renderablesq->w, tmp_renderablesq->h);
-	printf("%d\n", test_readback->size_components);
-	LIST_AddElement(&transforms, test_readback);
-	objects_update();
+	}
 
 	lua_close(L);
 	SHUTDOWN:
 	return 0;
 }
-	lua_script lua_loadscriptdata(char* fname) {
-	lua_script tmp_script;
+lua_script* lua_loadscriptdata(char* fname) {
+	lua_script* tmp_script = calloc(1, sizeof(lua_script));
 	FILE* fp = fopen(fname, "r+");
 	{
 		char* script_data;
@@ -109,23 +129,23 @@ int main(void) {
 		script_data = calloc(1, size);
 		fread(script_data, 1, size, fp);
 		fclose(fp);
-	    for (int i = 0; i < size; ++i) {
+		for (int i = 0; i < size; ++i) {
 			if (script_data[i] == '\0')
 				script_data[i] = ' ', size = i;
 		}
-		tmp_script.lua_fname = fname, tmp_script.lua_data = script_data, tmp_script.size = size;
+		tmp_script->lua_fname = fname, tmp_script->lua_data = script_data, tmp_script->size = size;
 		//printf("%s,%d\n", script_data,size);
 	}
 	int i;
-	for (i = 0; tmp_script.lua_fname[i] != '.'; ++i);
+	for (i = 0; tmp_script->lua_fname[i] != '.'; ++i);
 
-	tmp_script.name_size = i + 4;
+	LIST_AddElement(&scripts, tmp_script);
+	tmp_script->name_size = i + 4, tmp_script->resource_id = scripts.count - 1;
 
 	fclose(fp);
 	return tmp_script;
 }
 void lua_update(lua_script* script_to_update) {
-	luaL_openlibs(L);
 	//set lua globals here
 	int error = luaL_loadbuffer(L, script_to_update->lua_data, script_to_update->size, script_to_update->lua_fname) || lua_pcall(L,0,0,0);
 	if (error) {
