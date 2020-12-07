@@ -1,17 +1,6 @@
 #ifndef INCLUDED_LINKEDLIST_H
 #define INCLUDED_LINKEDLIST_H
 //this file is for linked lists
-typedef struct listNode listNode;
-struct listNode{
-	listNode* next, * prev;
-	void* data;
-
-};
-typedef struct linkedList linkedList;
-struct linkedList {
-	listNode* head;
-	int count;
-};
 
 void LIST_AddElement(linkedList* list, void* data) {
 	listNode* tmp_node = calloc(1, sizeof(listNode));
