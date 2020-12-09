@@ -17,8 +17,8 @@
 #include <chipmunk.h>
 //defines
 //window stuff
-#define WINDOW_WIDTH_START 1000
-#define WINDOW_HEIGHT_START 1000
+#define WINDOW_WIDTH_START 400
+#define WINDOW_HEIGHT_START 400
 //renderable flags
 #define RENDERABLE_SQUARE 1
 //component identifiers
@@ -37,9 +37,12 @@ extern float delta_time_engine;
 extern float start_engine;
 //global lua state
 extern lua_State* L;
-//global engine UI window
+//SDL stuff for the windows
 extern SDL_Window* ui_window;
-extern SDL_GLContext* ui_window_glcontext;
+extern SDL_Renderer* ui_window_renderer;
+extern SDL_Window* game_window;
+extern SDL_GLContext* game_window_glcontext;
+extern SDL_Thread* game_thread;
 //script struct
 typedef struct lua_script lua_script;
 struct lua_script {
@@ -104,7 +107,10 @@ extern linkedList transforms; //for all of the gametransforms in the scene
 //this is the start of "resource" lists, the idea is that instead of having each object have a copy of a 1kb lua script, we can keep it in this list and point to, make sure this gets proprely serailized
 extern linkedList music, audio, scripts, shaders;
 
-//function prototypes start here, first is seralization functins
+//function prototypes start here, first, game loop
+extern void game_main(Uint8 run);
+extern lua_script* lua_loadscriptdata(char* fname);
+//seralization functins
 extern void SERALIZE_WriteTransform(const char* fname, transform* input);
 extern transform* SERALIZE_ReadTransforms(const char* fname, unsigned int amount);
 //warning prototypes

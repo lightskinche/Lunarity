@@ -36,6 +36,9 @@
     <ClCompile Include="gl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gamemain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linkedlist_h.h">

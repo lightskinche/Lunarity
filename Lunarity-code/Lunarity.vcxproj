@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="console.c" />
+    <ClCompile Include="gamemain.c" />
     <ClCompile Include="gl.c" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="lua.c" />

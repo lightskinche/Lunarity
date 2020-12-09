@@ -1,6 +1,6 @@
 #include "main_h.h"
 void* LIST_At(const linkedList* const list, int location);
-//TODO SERALIZE AUDIO COMPONENT LIKE YOU SERIALIZED THE SCRIPT, MAKE IT USE THE RESOURCE LINKED LIST FOR AUDIO
+//DO NOT UPDATE THESE, THERE ARE TOO MANY CHANGES GOING ON IN THE INTERNAL ENGINE, IT IS A WASTE TO KEEP CHANGING THIS OVER AND OVER
 void SERALIZE_WriteTransform(const char* fname, transform* input) {
 	FILE* fp = fopen(fname, "w");
 	fprintf(fp, "%x\n%x\n", input->x, input->y);

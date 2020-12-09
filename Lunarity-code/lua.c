@@ -51,6 +51,7 @@ void LUA_SetKeyboardInput(Uint8* key_input) {
 		free(tmp_string);
 		free(start);
 	}
+	lua_settop(L, 0);
 }
 //functions that are meant to be called from lua start here
 //serialization
@@ -77,7 +78,7 @@ static int LUAFUNC_ReadSerializedNumber(lua_State* L) {
 static int LUAFUNC_BitwiseAND(lua_State* L) {
 	int a = luaL_checknumber(L, 1);
 	int b = luaL_checknumber(L, 2);
-	lua_pushnumber(L, a & b);
+	lua_pushnumber(L, (a & b));
 	return 1;
 }
 static int LUAFUNC_BitwiseOR(lua_State* L) {
