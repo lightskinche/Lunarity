@@ -49,7 +49,6 @@ int main(void) {
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 	//handle events and main engine loop
 	SDL_Event event_handle;
-	Uint8* key_input = SDL_GetKeyboardState(NULL);
 	while (1) {
 		start_engine = clock();
 		while (SDL_PollEvent(&event_handle)) {

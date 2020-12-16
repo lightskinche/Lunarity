@@ -1,5 +1,5 @@
 function transform_update()
-   if keyboard["scancode_y"] then
+   if keyboard["scancode_a"] then
    transform_x = transform_x + 1
    print("x is now", transform_x)
    end

@@ -21,9 +21,8 @@ C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(25,16): warning C4026:
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(48,16): warning C4028: formal parameter 1 different from declaration
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(48,16): warning C4133: 'function': incompatible types - from 'void (__cdecl *)(Uint8)' to 'SDL_ThreadFunction'
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(48,16): warning C4022: 'SDL_CreateThread': pointer mismatch for actual parameter 3
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(54,25): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(53,25): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(82,73): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(82,106): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
-C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(52,1): warning C4090: 'initializing': different 'const' qualifiers
 C:\Users\Light\source\repos\Lunarity\Lunarity-code\main.c(99,22): warning C4028: formal parameter 1 different from declaration
   Lunarity.vcxproj -> C:\Users\Light\source\repos\Lunarity\Lunarity-code\Debug\Lunarity.exe

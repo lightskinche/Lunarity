@@ -35,8 +35,6 @@ extern float delta_time_game;
 extern float start_game;
 extern float delta_time_engine;
 extern float start_engine;
-//global lua state
-extern lua_State* L;
 //SDL stuff for the windows
 extern SDL_Window* ui_window;
 extern SDL_Renderer* ui_window_renderer;
@@ -46,8 +44,9 @@ extern SDL_Thread* game_thread;
 //script struct
 typedef struct lua_script lua_script;
 struct lua_script {
-	char* lua_fname, *lua_data;
-	unsigned int size, name_size, resource_id;
+	char* lua_fname;//has to be null terminated
+	unsigned int resource_id;
+	lua_State* L;
 };
 //renderable objects
 typedef struct renderable_square renderable_square;
@@ -119,5 +118,5 @@ extern void CONSOLE_ThrowWarning(unsigned int flags, const char* message, const 
 extern audio_component* COMPONENT_CreateAudioComponent(const char* name, Mix_Chunk* data);
 extern void TRANSFORM_AddComponent(int index, void* component, Uint8 type, transform* transform_to_attach);
 extern void TRANSFORM_SetSize(transform* transform_to_modify, int size);
-extern void LUA_SetKeyboardInput(Uint8* key_input);
-extern void LUA_SetFunctions(void);
+extern void LUA_SetKeyboardInput(lua_State* L, Uint8* key_input);
+extern void LUA_SetFunctions(lua_State* L);

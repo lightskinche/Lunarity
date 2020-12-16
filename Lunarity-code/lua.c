@@ -19,7 +19,7 @@ void TRANSFORM_SetSize(transform* transform_to_modify, int size) {
 	transform_to_modify->size_components = size;
 }
 //TODO finsih adding keys like CTRL, ALT, F1, etc
-void LUA_SetKeyboardInput(Uint8* key_input) {
+void LUA_SetKeyboardInput(lua_State* L, Uint8* key_input) {
 	//setting alphabet
 	for (int i = 0; i < 26; ++i) {
 		char* tmp_string = calloc(13, 1);
@@ -88,7 +88,7 @@ static int LUAFUNC_BitwiseOR(lua_State* L) {
 	return 1;
 }
 //this functions sets up the functions that lua can use
-void LUA_SetFunctions(void) {
+void LUA_SetFunctions(lua_State* L) {
 	lua_pushcfunction(L, LUAFUNC_SerializeNumber);
 	lua_setglobal(L, "WriteSerializeNum");
 

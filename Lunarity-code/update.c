@@ -1,9 +1,10 @@
 #include "main_h.h"
 
-void objects_update(void) {
+void objects_update(Uint8* keyboard) {
 	for (int i = 0; i < transforms.count; ++i) {
 		transform* tmp = LIST_At(&transforms, i);
 		if (tmp->attached_script) {
+			lua_State* L = tmp->attached_script->L;
 			//pass the x and y of this transform into the lua script
 			lua_pushnumber(L, tmp->x);
 			lua_setglobal(L, "transform_x");
@@ -35,9 +36,11 @@ void objects_update(void) {
 					free(tmp_name_buffer);
 				}
 			}
+			//update keyboard input
+			LUA_SetKeyboardInput(L, keyboard);
 			printf("%s", lua_output_color);//so that lua output will be megenta and can be easily noticed
 			//after this all components try and answer their function calls
-			lua_update(tmp->attached_script);
+			lua_pcall(L, 0, 0, 0);
 
 			//retrive updated x and y values
 			lua_getglobal(L, "transform_update"); //this function updates the x and y
